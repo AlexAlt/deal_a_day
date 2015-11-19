@@ -1,0 +1,76 @@
+From 421e886ca71abccea06fbb03da94b9933e3c55cf Mon Sep 17 00:00:00 2001
+From: AlexAlt <alexandra.m.altieri@gmail.com>
+Date: Thu, 19 Nov 2015 10:20:03 -0800
+Subject: [PATCH 05/16] Created spec files for testing file_upload and purchase
+ relationship. Added model files
+
+---
+ code_challenge/app/models/file_upload.rb       | 2 ++
+ code_challenge/app/models/purchase.rb          | 2 ++
+ code_challenge/config/environments/test.rb     | 2 +-
+ code_challenge/spec/models/file_upload_spec.rb | 5 +++++
+ code_challenge/spec/models/purchase_spec.rb    | 5 +++++
+ 5 files changed, 15 insertions(+), 1 deletion(-)
+ create mode 100644 code_challenge/app/models/file_upload.rb
+ create mode 100644 code_challenge/app/models/purchase.rb
+ create mode 100644 code_challenge/spec/models/file_upload_spec.rb
+ create mode 100644 code_challenge/spec/models/purchase_spec.rb
+
+diff --git a/code_challenge/app/models/file_upload.rb b/code_challenge/app/models/file_upload.rb
+new file mode 100644
+index 0000000..449476a
+--- /dev/null
++++ b/code_challenge/app/models/file_upload.rb
+@@ -0,0 +1,2 @@
++class FileUpload < ActiveRecord::Base
++end
+\ No newline at end of file
+diff --git a/code_challenge/app/models/purchase.rb b/code_challenge/app/models/purchase.rb
+new file mode 100644
+index 0000000..cab98ca
+--- /dev/null
++++ b/code_challenge/app/models/purchase.rb
+@@ -0,0 +1,2 @@
++class Purchase < ActiveRecord::Base
++end
+\ No newline at end of file
+diff --git a/code_challenge/config/environments/test.rb b/code_challenge/config/environments/test.rb
+index 1c19f08..8d2d74f 100644
+--- a/code_challenge/config/environments/test.rb
++++ b/code_challenge/config/environments/test.rb
+@@ -21,7 +21,7 @@ Rails.application.configure do
+   config.action_controller.perform_caching = false
+ 
+   # Raise exceptions instead of rendering exception templates.
+-  config.action_dispatch.show_exceptions = false
++  config.action_dispatch.show_exceptions = true
+ 
+   # Disable request forgery protection in test environment.
+   config.action_controller.allow_forgery_protection = false
+diff --git a/code_challenge/spec/models/file_upload_spec.rb b/code_challenge/spec/models/file_upload_spec.rb
+new file mode 100644
+index 0000000..e14171c
+--- /dev/null
++++ b/code_challenge/spec/models/file_upload_spec.rb
+@@ -0,0 +1,5 @@
++require 'rails_helper'
++
++describe FileUpload do
++  it { should have_many :purchases}
++end
+\ No newline at end of file
+diff --git a/code_challenge/spec/models/purchase_spec.rb b/code_challenge/spec/models/purchase_spec.rb
+new file mode 100644
+index 0000000..36d831b
+--- /dev/null
++++ b/code_challenge/spec/models/purchase_spec.rb
+@@ -0,0 +1,5 @@
++require 'rails_helper'
++
++describe Purchase do
++  it { should belong_to :file_upload }
++end
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+

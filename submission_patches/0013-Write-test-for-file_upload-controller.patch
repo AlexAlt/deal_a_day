@@ -1,0 +1,62 @@
+From 5ce94707eab5346ea5d1f6fd2ee807e894e773ed Mon Sep 17 00:00:00 2001
+From: AlexAlt <alexandra.m.altieri@gmail.com>
+Date: Thu, 19 Nov 2015 12:48:02 -0800
+Subject: [PATCH 13/16] Write test for file_upload controller.
+
+---
+ code_challenge/app/controllers/file_uploads_controller.rb   |  2 +-
+ .../spec/controllers/file_upload_controller_spec.rb         | 13 +++++++++++++
+ code_challenge/spec/features/upload_path_spec.rb            |  2 +-
+ 3 files changed, 15 insertions(+), 2 deletions(-)
+ create mode 100644 code_challenge/spec/controllers/file_upload_controller_spec.rb
+
+diff --git a/code_challenge/app/controllers/file_uploads_controller.rb b/code_challenge/app/controllers/file_uploads_controller.rb
+index 3d48cfc..603694c 100644
+--- a/code_challenge/app/controllers/file_uploads_controller.rb
++++ b/code_challenge/app/controllers/file_uploads_controller.rb
+@@ -5,7 +5,7 @@ class FileUploadsController < ApplicationController
+ 
+   def import
+     new_upload = FileUpload.create!
+-    Purchase.import(params[:file], new_upload)
++    Purchase.import(params[:file].path, new_upload)
+     redirect_to root_path
+   end
+ end
+\ No newline at end of file
+diff --git a/code_challenge/spec/controllers/file_upload_controller_spec.rb b/code_challenge/spec/controllers/file_upload_controller_spec.rb
+new file mode 100644
+index 0000000..0984af7
+--- /dev/null
++++ b/code_challenge/spec/controllers/file_upload_controller_spec.rb
+@@ -0,0 +1,13 @@
++require 'rails_helper'
++
++describe FileUploadsController do
++
++  it 'uploads a csv file' do
++    file = fixture_file_upload("csv/test_example_data.csv", "text/csv")
++
++    allow(Purchase).to receive(:import)
++    params = {:file => file}
++    post :import, params
++    expect(response).to redirect_to(root_path)
++  end
++end
+\ No newline at end of file
+diff --git a/code_challenge/spec/features/upload_path_spec.rb b/code_challenge/spec/features/upload_path_spec.rb
+index 1a2063f..aee72d7 100644
+--- a/code_challenge/spec/features/upload_path_spec.rb
++++ b/code_challenge/spec/features/upload_path_spec.rb
+@@ -5,6 +5,6 @@ describe 'the process for uploading a file' do
+     visit '/'
+     attach_file('file', Rails.root + "../example_data.csv")
+     click_on "Import CSV"
+-    expect(page).to have_content 'Purchaser Name'
++    expect(page).to have_content 'Marty McFly'
+   end
+ end
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+

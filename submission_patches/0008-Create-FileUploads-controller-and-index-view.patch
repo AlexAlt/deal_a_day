@@ -1,0 +1,29 @@
+From 9c9a8beb753f036156d7b7fc8c38dd115d6647e0 Mon Sep 17 00:00:00 2001
+From: AlexAlt <alexandra.m.altieri@gmail.com>
+Date: Thu, 19 Nov 2015 10:55:29 -0800
+Subject: [PATCH 08/16] Create FileUploads controller and index view
+
+---
+ code_challenge/app/controllers/file_uploads_controller.rb | 4 ++++
+ code_challenge/app/views/file_uploads/index.html.erb      | 0
+ 2 files changed, 4 insertions(+)
+ create mode 100644 code_challenge/app/controllers/file_uploads_controller.rb
+ create mode 100644 code_challenge/app/views/file_uploads/index.html.erb
+
+diff --git a/code_challenge/app/controllers/file_uploads_controller.rb b/code_challenge/app/controllers/file_uploads_controller.rb
+new file mode 100644
+index 0000000..27c566a
+--- /dev/null
++++ b/code_challenge/app/controllers/file_uploads_controller.rb
+@@ -0,0 +1,4 @@
++class FileUploadsController < ApplicationController
++  def index
++  end
++end
+\ No newline at end of file
+diff --git a/code_challenge/app/views/file_uploads/index.html.erb b/code_challenge/app/views/file_uploads/index.html.erb
+new file mode 100644
+index 0000000..e69de29
+-- 
+2.3.2 (Apple Git-55)
+

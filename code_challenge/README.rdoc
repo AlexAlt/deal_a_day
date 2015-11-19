@@ -6,7 +6,9 @@ How to get this app up and running:
 
 * Clone this repository
 
-* Run `bundle` inside the directory to install gems
+* cd into the code_challenge directory
+
+* Run `bundle` to install gems
 
 * Get Postgres running. Version 9.4.4
 

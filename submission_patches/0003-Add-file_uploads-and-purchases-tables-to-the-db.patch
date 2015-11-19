@@ -1,0 +1,93 @@
+From e902408d8b173e2e59cadd900bad99de1707b856 Mon Sep 17 00:00:00 2001
+From: AlexAlt <alexandra.m.altieri@gmail.com>
+Date: Thu, 19 Nov 2015 10:13:30 -0800
+Subject: [PATCH 03/16] Add file_uploads and purchases tables to the db
+
+---
+ .../20151119180333_create_file_uploads_table.rb    |  7 +++++
+ .../20151119180721_create_purchases_table.rb       | 15 +++++++++
+ code_challenge/db/schema.rb                        | 36 ++++++++++++++++++++++
+ 3 files changed, 58 insertions(+)
+ create mode 100644 code_challenge/db/migrate/20151119180333_create_file_uploads_table.rb
+ create mode 100644 code_challenge/db/migrate/20151119180721_create_purchases_table.rb
+ create mode 100644 code_challenge/db/schema.rb
+
+diff --git a/code_challenge/db/migrate/20151119180333_create_file_uploads_table.rb b/code_challenge/db/migrate/20151119180333_create_file_uploads_table.rb
+new file mode 100644
+index 0000000..a86db3b
+--- /dev/null
++++ b/code_challenge/db/migrate/20151119180333_create_file_uploads_table.rb
+@@ -0,0 +1,7 @@
++class CreateFileUploadsTable < ActiveRecord::Migration
++  def change
++    create_table :file_uploads do |t|
++      t.timestamps
++    end
++  end
++end
+diff --git a/code_challenge/db/migrate/20151119180721_create_purchases_table.rb b/code_challenge/db/migrate/20151119180721_create_purchases_table.rb
+new file mode 100644
+index 0000000..1423692
+--- /dev/null
++++ b/code_challenge/db/migrate/20151119180721_create_purchases_table.rb
+@@ -0,0 +1,15 @@
++class CreatePurchasesTable < ActiveRecord::Migration
++  def change
++    create_table :purchases do |t|
++      t.string :purchaser_name
++      t.string :item_description
++      t.decimal :item_price, :precision => 5, :scale => 2
++      t.string :purchase_count
++      t.string :merchant_address
++      t.string :merchant_name
++      t.integer :file_upload_id
++
++      t.timestamps
++    end
++  end
++end
+diff --git a/code_challenge/db/schema.rb b/code_challenge/db/schema.rb
+new file mode 100644
+index 0000000..614e08f
+--- /dev/null
++++ b/code_challenge/db/schema.rb
+@@ -0,0 +1,36 @@
++# encoding: UTF-8
++# This file is auto-generated from the current state of the database. Instead
++# of editing this file, please use the migrations feature of Active Record to
++# incrementally modify your database, and then regenerate this schema definition.
++#
++# Note that this schema.rb definition is the authoritative source for your
++# database schema. If you need to create the application database on another
++# system, you should be using db:schema:load, not running all the migrations
++# from scratch. The latter is a flawed and unsustainable approach (the more migrations
++# you'll amass, the slower it'll run and the greater likelihood for issues).
++#
++# It's strongly recommended that you check this file into your version control system.
++
++ActiveRecord::Schema.define(version: 20151119180721) do
++
++  # These are extensions that must be enabled in order to support this database
++  enable_extension "plpgsql"
++
++  create_table "file_uploads", force: :cascade do |t|
++    t.datetime "created_at"
++    t.datetime "updated_at"
++  end
++
++  create_table "purchases", force: :cascade do |t|
++    t.string   "purchaser_name"
++    t.string   "item_description"
++    t.decimal  "item_price",       precision: 5, scale: 2
++    t.string   "purchase_count"
++    t.string   "merchant_address"
++    t.string   "merchant_name"
++    t.integer  "file_upload_id"
++    t.datetime "created_at"
++    t.datetime "updated_at"
++  end
++
++end
+-- 
+2.3.2 (Apple Git-55)
+

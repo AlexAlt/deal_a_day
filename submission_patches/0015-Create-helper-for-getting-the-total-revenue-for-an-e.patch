@@ -1,0 +1,31 @@
+From a03cd6b3cc609d9f4c486284d6449d53f48b5ce6 Mon Sep 17 00:00:00 2001
+From: AlexAlt <alexandra.m.altieri@gmail.com>
+Date: Thu, 19 Nov 2015 12:55:15 -0800
+Subject: [PATCH 15/16] Create helper for getting the total revenue for an
+ entire uploaded file
+
+---
+ code_challenge/app/helpers/purchases_helper.rb | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+ create mode 100644 code_challenge/app/helpers/purchases_helper.rb
+
+diff --git a/code_challenge/app/helpers/purchases_helper.rb b/code_challenge/app/helpers/purchases_helper.rb
+new file mode 100644
+index 0000000..49ce198
+--- /dev/null
++++ b/code_challenge/app/helpers/purchases_helper.rb
+@@ -0,0 +1,10 @@
++module PurchasesHelper
++  def total_purchase_revenue(purchases)
++    total_revenue = 0.0
++    purchases.each do |purchase|
++      sub_total = purchase.purchase_total
++      total_revenue += sub_total
++    end
++    total_revenue
++  end
++end
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+

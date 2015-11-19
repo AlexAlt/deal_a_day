@@ -1,0 +1,51 @@
+From 10697c9542f25830ef138df19af77390224c7a3d Mon Sep 17 00:00:00 2001
+From: AlexAlt <alexandra.m.altieri@gmail.com>
+Date: Thu, 19 Nov 2015 12:46:48 -0800
+Subject: [PATCH 12/16] Refactor Purchase model spec to use fixture file
+ instead.
+
+---
+ code_challenge/spec/fixtures/csv/test_example_data.csv |  5 +++++
+ code_challenge/spec/models/purchase_spec.rb            | 11 ++---------
+ 2 files changed, 7 insertions(+), 9 deletions(-)
+ create mode 100644 code_challenge/spec/fixtures/csv/test_example_data.csv
+
+diff --git a/code_challenge/spec/fixtures/csv/test_example_data.csv b/code_challenge/spec/fixtures/csv/test_example_data.csv
+new file mode 100644
+index 0000000..20b562b
+--- /dev/null
++++ b/code_challenge/spec/fixtures/csv/test_example_data.csv
+@@ -0,0 +1,5 @@
++purchaser name,item description,item price,purchase count,merchant address,merchant name
++Snake Plissken,$10 off $20 of food,10.0,2,987 Fake St,Bob's Pizza
++Amy Pond,$30 of awesome for $10,10.0,5,456 Unreal Rd,Tom's Awesome Shop
++Marty McFly,$20 Sneakers for $5,5.0,1,123 Fake St,Sneaker Store Emporium
++Snake Plissken,$20 Sneakers for $5,5.0,4,123 Fake St,Sneaker Store Emporium
+diff --git a/code_challenge/spec/models/purchase_spec.rb b/code_challenge/spec/models/purchase_spec.rb
+index 01b3987..e157c2e 100644
+--- a/code_challenge/spec/models/purchase_spec.rb
++++ b/code_challenge/spec/models/purchase_spec.rb
+@@ -4,18 +4,11 @@ describe Purchase do
+   it { should belong_to :file_upload }
+ 
+   describe "#import" do
+-    let(:data) { 
+-      "purchaser name,item description,item price,purchase count,merchant address,merchant name\r" +
+-      "Snake Plissken,$10 off $20 of food,10.0,2,987 Fake St,Bob's Pizza\r" +
+-      "Amy Pond,$30 of awesome for $10,10.0,5,456 Unreal Rd,Tom's Awesome Shop\r" +
+-      "Marty McFly,$20 Sneakers for $5,5.0,1,123 Fake St,Sneaker Store Emporium\r "+
+-      "Snake Plissken,$20 Sneakers for $5,5.0,4,123 Fake St,Sneaker Store Emporium\r"
+-      }
+ 
+     it 'creates new Purchases from an imported CSV file' do
++      file = (Rails.root.join("spec/fixtures/csv/test_example_data.csv"))
+       file_upload = FileUpload.create!
+-      allow(File).to receive(:open).and_return(StringIO.new(data)) 
+-      Purchase.import("filename", file_upload)
++      Purchase.import(file, file_upload)
+       expect(file_upload.purchases.length).to eq(4)
+     end
+   end
+-- 
+2.3.2 (Apple Git-55)
+

@@ -1,0 +1,30 @@
+From 42d39d77751143011aaee620186947cba785e73e Mon Sep 17 00:00:00 2001
+From: AlexAlt <alexandra.m.altieri@gmail.com>
+Date: Thu, 19 Nov 2015 10:55:52 -0800
+Subject: [PATCH 09/16] Write first integration spec to test that files are
+ successfully uploaded.
+
+---
+ code_challenge/spec/features/upload_path_spec.rb | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+ create mode 100644 code_challenge/spec/features/upload_path_spec.rb
+
+diff --git a/code_challenge/spec/features/upload_path_spec.rb b/code_challenge/spec/features/upload_path_spec.rb
+new file mode 100644
+index 0000000..000a574
+--- /dev/null
++++ b/code_challenge/spec/features/upload_path_spec.rb
+@@ -0,0 +1,9 @@
++require 'rails_helper'
++
++describe 'the process for uploading a file' do
++  it 'uploads a file' do
++    visit '/'
++    attach_file('Import CSV', Rails.root + "../example_data.csv")
++    expect(page).to have_content 'Purchaser Name'
++  end
++end
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+

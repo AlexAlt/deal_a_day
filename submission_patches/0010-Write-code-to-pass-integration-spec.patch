@@ -1,0 +1,88 @@
+From 7d929f2be0e6881d85edbe52548e0ea41dc9dc37 Mon Sep 17 00:00:00 2001
+From: AlexAlt <alexandra.m.altieri@gmail.com>
+Date: Thu, 19 Nov 2015 10:59:59 -0800
+Subject: [PATCH 10/16] Write code to pass integration spec.
+
+---
+ .../app/controllers/file_uploads_controller.rb     |  7 +++++
+ .../app/views/file_uploads/index.html.erb          | 36 ++++++++++++++++++++++
+ code_challenge/spec/features/upload_path_spec.rb   |  3 +-
+ 3 files changed, 45 insertions(+), 1 deletion(-)
+
+diff --git a/code_challenge/app/controllers/file_uploads_controller.rb b/code_challenge/app/controllers/file_uploads_controller.rb
+index 27c566a..3d48cfc 100644
+--- a/code_challenge/app/controllers/file_uploads_controller.rb
++++ b/code_challenge/app/controllers/file_uploads_controller.rb
+@@ -1,4 +1,11 @@
+ class FileUploadsController < ApplicationController
+   def index
++    @file_uploads = FileUpload.all
++  end
++
++  def import
++    new_upload = FileUpload.create!
++    Purchase.import(params[:file], new_upload)
++    redirect_to root_path
+   end
+ end
+\ No newline at end of file
+diff --git a/code_challenge/app/views/file_uploads/index.html.erb b/code_challenge/app/views/file_uploads/index.html.erb
+index e69de29..05921a4 100644
+--- a/code_challenge/app/views/file_uploads/index.html.erb
++++ b/code_challenge/app/views/file_uploads/index.html.erb
+@@ -0,0 +1,36 @@
++<%= form_tag import_path, multipart: true do %>
++  <%= file_field_tag :file %>
++  <%= submit_tag "Import CSV" %>
++<% end %>
++<hr>
++
++<% if @file_uploads.any? %>
++  <% @file_uploads.each do |file_upload| %>
++    <table>
++      <tr>
++        <th>Purchaser Name</th>
++        <th>Item Description</th>
++        <th>Item Price</th>
++        <th>Purchase Count</th>
++        <th>Merchant Address</th>
++        <th>Merchant Name</th>
++      </tr>
++        <% file_upload.purchases.each do |purchase| %>
++          <tr>
++            <td><%=purchase.purchaser_name%></td>
++            <td><%=purchase.item_description%></td> 
++            <td><%=number_to_currency(purchase.item_price)%></td>
++            <td><%=purchase.purchase_count%></td>
++            <td><%=purchase.merchant_address%></td> 
++            <td><%=purchase.merchant_name%></td>
++          </tr>
++        <% end %>
++        <tr>
++          <th>Total Revenue</th>
++          <td><%= number_to_currency(total_purchase_revenue(file_upload.purchases)) %></td>
++        </tr>
++    </table>
++  <% end %>
++<% else %>
++  No purchases to show.
++<% end %>
+\ No newline at end of file
+diff --git a/code_challenge/spec/features/upload_path_spec.rb b/code_challenge/spec/features/upload_path_spec.rb
+index 000a574..1a2063f 100644
+--- a/code_challenge/spec/features/upload_path_spec.rb
++++ b/code_challenge/spec/features/upload_path_spec.rb
+@@ -3,7 +3,8 @@ require 'rails_helper'
+ describe 'the process for uploading a file' do
+   it 'uploads a file' do
+     visit '/'
+-    attach_file('Import CSV', Rails.root + "../example_data.csv")
++    attach_file('file', Rails.root + "../example_data.csv")
++    click_on "Import CSV"
+     expect(page).to have_content 'Purchaser Name'
+   end
+ end
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+

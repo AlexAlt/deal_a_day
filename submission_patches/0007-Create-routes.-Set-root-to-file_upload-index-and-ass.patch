@@ -1,0 +1,79 @@
+From 38d335271f018b5bb22776b260d88adb7675c6fd Mon Sep 17 00:00:00 2001
+From: AlexAlt <alexandra.m.altieri@gmail.com>
+Date: Thu, 19 Nov 2015 10:29:25 -0800
+Subject: [PATCH 07/16] Create routes. Set root to file_upload#index, and
+ assign route to import action
+
+---
+ code_challenge/config/routes.rb | 58 ++++-------------------------------------
+ 1 file changed, 5 insertions(+), 53 deletions(-)
+
+diff --git a/code_challenge/config/routes.rb b/code_challenge/config/routes.rb
+index 3f66539..f3f9198 100644
+--- a/code_challenge/config/routes.rb
++++ b/code_challenge/config/routes.rb
+@@ -1,56 +1,8 @@
+ Rails.application.routes.draw do
+-  # The priority is based upon order of creation: first created -> highest priority.
+-  # See how all your routes lay out with "rake routes".
++  root "file_uploads#index"
+ 
+-  # You can have the root of your site routed with "root"
+-  # root 'welcome#index'
+-
+-  # Example of regular route:
+-  #   get 'products/:id' => 'catalog#view'
+-
+-  # Example of named route that can be invoked with purchase_url(id: product.id)
+-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+-
+-  # Example resource route (maps HTTP verbs to controller actions automatically):
+-  #   resources :products
+-
+-  # Example resource route with options:
+-  #   resources :products do
+-  #     member do
+-  #       get 'short'
+-  #       post 'toggle'
+-  #     end
+-  #
+-  #     collection do
+-  #       get 'sold'
+-  #     end
+-  #   end
+-
+-  # Example resource route with sub-resources:
+-  #   resources :products do
+-  #     resources :comments, :sales
+-  #     resource :seller
+-  #   end
+-
+-  # Example resource route with more complex sub-resources:
+-  #   resources :products do
+-  #     resources :comments
+-  #     resources :sales do
+-  #       get 'recent', on: :collection
+-  #     end
+-  #   end
+-
+-  # Example resource route with concerns:
+-  #   concern :toggleable do
+-  #     post 'toggle'
+-  #   end
+-  #   resources :posts, concerns: :toggleable
+-  #   resources :photos, concerns: :toggleable
+-
+-  # Example resource route within a namespace:
+-  #   namespace :admin do
+-  #     # Directs /admin/products/* to Admin::ProductsController
+-  #     # (app/controllers/admin/products_controller.rb)
+-  #     resources :products
+-  #   end
++  resources :file_uploads
++  controller :file_uploads do
++    post :import 
++  end
+ end
+-- 
+2.3.2 (Apple Git-55)
+

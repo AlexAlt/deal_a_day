@@ -1,0 +1,51 @@
+From fa5e8b438fdca1d012134794c26d9493a28e83f4 Mon Sep 17 00:00:00 2001
+From: AlexAlt <alexandra.m.altieri@gmail.com>
+Date: Thu, 19 Nov 2015 12:53:26 -0800
+Subject: [PATCH 14/16] Write test for finding the total of a purchase. Write
+ code to pass the test.
+
+---
+ code_challenge/app/models/purchase.rb       | 8 +++++++-
+ code_challenge/spec/models/purchase_spec.rb | 7 +++++++
+ 2 files changed, 14 insertions(+), 1 deletion(-)
+
+diff --git a/code_challenge/app/models/purchase.rb b/code_challenge/app/models/purchase.rb
+index b3fc8e5..c3242af 100644
+--- a/code_challenge/app/models/purchase.rb
++++ b/code_challenge/app/models/purchase.rb
+@@ -1,8 +1,14 @@
+ class Purchase < ActiveRecord::Base
+   belongs_to :file_upload
+ 
+-  def self.import(file_path, file_upload)
++  def purchase_total
++    count = self.purchase_count.to_i
++    price = self.item_price
++    total = count * price
++    total
++  end
+ 
++  def self.import(file_path, file_upload)
+     CSV.foreach(file_path, headers: true) do |row|
+       rh = row.to_hash
+       purchase_hash = {}
+diff --git a/code_challenge/spec/models/purchase_spec.rb b/code_challenge/spec/models/purchase_spec.rb
+index e157c2e..9195407 100644
+--- a/code_challenge/spec/models/purchase_spec.rb
++++ b/code_challenge/spec/models/purchase_spec.rb
+@@ -12,4 +12,11 @@ describe Purchase do
+       expect(file_upload.purchases.length).to eq(4)
+     end
+   end
++
++  describe ".purchase_total" do
++    it 'gets the total revenue from an individual purchase' do
++      new_purchase = Purchase.new({:purchase_count => "3", :item_price => 25.0})
++      expect(new_purchase.purchase_total).to eq(75)
++    end
++  end
+ end
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
