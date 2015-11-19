@@ -4,8 +4,6 @@ How to get this app up and running:
 
 * Ruby version - 2.2.0
 
-* Clone this repository
-
 * cd into the code_challenge directory
 
 * Run `bundle` to install gems
