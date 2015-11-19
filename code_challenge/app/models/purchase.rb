@@ -2,10 +2,9 @@ class Purchase < ActiveRecord::Base
   belongs_to :file_upload
 
   def purchase_total
-    count = self.purchase_count.to_i
+    count = self.purchase_count
     price = self.item_price
-    total = count * price
-    total
+    count * price
   end
 
   def self.import(file_path, file_upload)
