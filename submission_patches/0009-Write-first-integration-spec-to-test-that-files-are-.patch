@@ -1,7 +1,7 @@
 From 42d39d77751143011aaee620186947cba785e73e Mon Sep 17 00:00:00 2001
 From: AlexAlt <alexandra.m.altieri@gmail.com>
 Date: Thu, 19 Nov 2015 10:55:52 -0800
-Subject: [PATCH 09/16] Write first integration spec to test that files are
+Subject: [PATCH 09/22] Write first integration spec to test that files are
  successfully uploaded.
 
 ---

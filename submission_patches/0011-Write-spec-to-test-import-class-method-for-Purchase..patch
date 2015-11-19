@@ -1,7 +1,7 @@
 From 1cbc42540bfde93cd2f3dcfd6bcc6fb198e50f8a Mon Sep 17 00:00:00 2001
 From: AlexAlt <alexandra.m.altieri@gmail.com>
 Date: Thu, 19 Nov 2015 12:00:46 -0800
-Subject: [PATCH 11/16] Write spec to test import class method for Purchase.
+Subject: [PATCH 11/22] Write spec to test import class method for Purchase.
  Create code to pass spec.
 
 ---

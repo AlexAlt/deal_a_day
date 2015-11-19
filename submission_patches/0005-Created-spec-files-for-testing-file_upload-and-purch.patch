@@ -1,7 +1,7 @@
 From 421e886ca71abccea06fbb03da94b9933e3c55cf Mon Sep 17 00:00:00 2001
 From: AlexAlt <alexandra.m.altieri@gmail.com>
 Date: Thu, 19 Nov 2015 10:20:03 -0800
-Subject: [PATCH 05/16] Created spec files for testing file_upload and purchase
+Subject: [PATCH 05/22] Created spec files for testing file_upload and purchase
  relationship. Added model files
 
 ---

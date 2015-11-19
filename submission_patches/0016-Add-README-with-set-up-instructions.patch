@@ -1,7 +1,7 @@
 From a88dc8a7a2446a26162508901c15ecce2444cb5a Mon Sep 17 00:00:00 2001
 From: AlexAlt <alexandra.m.altieri@gmail.com>
 Date: Thu, 19 Nov 2015 13:24:56 -0800
-Subject: [PATCH 16/16] Add README with set up instructions
+Subject: [PATCH 16/22] Add README with set up instructions
 
 ---
  code_challenge/README.rdoc | 26 ++++++++------------------

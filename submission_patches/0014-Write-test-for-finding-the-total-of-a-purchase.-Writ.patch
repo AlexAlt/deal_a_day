@@ -1,7 +1,7 @@
 From fa5e8b438fdca1d012134794c26d9493a28e83f4 Mon Sep 17 00:00:00 2001
 From: AlexAlt <alexandra.m.altieri@gmail.com>
 Date: Thu, 19 Nov 2015 12:53:26 -0800
-Subject: [PATCH 14/16] Write test for finding the total of a purchase. Write
+Subject: [PATCH 14/22] Write test for finding the total of a purchase. Write
  code to pass the test.
 
 ---

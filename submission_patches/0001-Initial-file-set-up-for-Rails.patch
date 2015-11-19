@@ -1,7 +1,7 @@
 From cbd55212223b6864537cda908e76ab6b1717fad9 Mon Sep 17 00:00:00 2001
 From: AlexAlt <alexandra.m.altieri@gmail.com>
 Date: Thu, 19 Nov 2015 09:54:31 -0800
-Subject: [PATCH 01/16] Initial file set up for Rails.
+Subject: [PATCH 01/22] Initial file set up for Rails.
 
 ---
  code_challenge/.gitignore                          |  13 ++

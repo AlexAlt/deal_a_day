@@ -1,7 +1,7 @@
 From 5a11ed4b7b897364d606c00b272c727105d77ad7 Mon Sep 17 00:00:00 2001
 From: AlexAlt <alexandra.m.altieri@gmail.com>
 Date: Thu, 19 Nov 2015 10:14:42 -0800
-Subject: [PATCH 04/16] Add require csv to application.rb
+Subject: [PATCH 04/22] Add require csv to application.rb
 
 ---
  code_challenge/config/application.rb | 1 +

@@ -1,7 +1,7 @@
 From 02797694c62ec4ba7ac8a1b105e8d5a62773524d Mon Sep 17 00:00:00 2001
 From: AlexAlt <alexandra.m.altieri@gmail.com>
 Date: Thu, 19 Nov 2015 10:01:19 -0800
-Subject: [PATCH 02/16] Install gems for testing, clean up comments in
+Subject: [PATCH 02/22] Install gems for testing, clean up comments in
  rails_helper
 
 ---

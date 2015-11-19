@@ -1,7 +1,7 @@
 From a03cd6b3cc609d9f4c486284d6449d53f48b5ce6 Mon Sep 17 00:00:00 2001
 From: AlexAlt <alexandra.m.altieri@gmail.com>
 Date: Thu, 19 Nov 2015 12:55:15 -0800
-Subject: [PATCH 15/16] Create helper for getting the total revenue for an
+Subject: [PATCH 15/22] Create helper for getting the total revenue for an
  entire uploaded file
 
 ---

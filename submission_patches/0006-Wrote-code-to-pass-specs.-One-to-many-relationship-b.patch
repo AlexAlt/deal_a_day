@@ -1,7 +1,7 @@
 From f23e873bef5b19f009a1919b9071b0859f1a9239 Mon Sep 17 00:00:00 2001
 From: AlexAlt <alexandra.m.altieri@gmail.com>
 Date: Thu, 19 Nov 2015 10:21:05 -0800
-Subject: [PATCH 06/16] Wrote code to pass specs. One-to-many relationship
+Subject: [PATCH 06/22] Wrote code to pass specs. One-to-many relationship
  between file_uploads and purchases now established.
 
 ---

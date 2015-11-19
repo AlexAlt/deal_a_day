@@ -1,7 +1,7 @@
 From e902408d8b173e2e59cadd900bad99de1707b856 Mon Sep 17 00:00:00 2001
 From: AlexAlt <alexandra.m.altieri@gmail.com>
 Date: Thu, 19 Nov 2015 10:13:30 -0800
-Subject: [PATCH 03/16] Add file_uploads and purchases tables to the db
+Subject: [PATCH 03/22] Add file_uploads and purchases tables to the db
 
 ---
  .../20151119180333_create_file_uploads_table.rb    |  7 +++++

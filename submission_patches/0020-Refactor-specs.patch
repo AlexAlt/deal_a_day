@@ -1,0 +1,674 @@
+From e6ce5c0ed754a5fec62174afc883d7114cdcf6a5 Mon Sep 17 00:00:00 2001
+From: AlexAlt <alexandra.m.altieri@gmail.com>
+Date: Thu, 19 Nov 2015 15:38:19 -0800
+Subject: [PATCH 20/22] Refactor specs
+
+---
+ code_challenge/coverage/.resultset.json            |   7 +-
+ code_challenge/coverage/index.html                 | 188 ++++++++++-----------
+ .../controllers/file_upload_controller_spec.rb     |  14 +-
+ code_challenge/spec/features/upload_path_spec.rb   |   2 +-
+ .../spec/helpers/purchase_helper_spec.rb           |  10 +-
+ code_challenge/spec/models/purchase_spec.rb        |   7 +-
+ 6 files changed, 111 insertions(+), 117 deletions(-)
+
+diff --git a/code_challenge/coverage/.resultset.json b/code_challenge/coverage/.resultset.json
+index 4f574aa..2da7904 100644
+--- a/code_challenge/coverage/.resultset.json
++++ b/code_challenge/coverage/.resultset.json
+@@ -8,12 +8,14 @@
+         null,
+         1,
+         1,
++        1,
+         null,
+         1,
+         1,
+         1,
+         1,
+         null,
++        null,
+         null
+       ],
+       "/Users/alexandraaltieri/Desktop/codechallenge/code_challenge/spec/rails_helper.rb": [
+@@ -230,7 +232,6 @@
+         2,
+         2,
+         6,
+-        6,
+         null,
+         2,
+         null,
+@@ -302,7 +303,6 @@
+         2,
+         null,
+         1,
+-        null,
+         1,
+         1,
+         1,
+@@ -327,7 +327,6 @@
+         7,
+         7,
+         7,
+-        7,
+         null,
+         null,
+         1,
+@@ -344,6 +343,6 @@
+         null
+       ]
+     },
+-    "timestamp": 1447969534
++    "timestamp": 1447975497
+   }
+ }
+diff --git a/code_challenge/coverage/index.html b/code_challenge/coverage/index.html
+index e9bbf40..e03d7cc 100644
+--- a/code_challenge/coverage/index.html
++++ b/code_challenge/coverage/index.html
+@@ -14,7 +14,7 @@
+       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
+     </div>
+     <div id="wrapper" style="display:none;">
+-      <div class="timestamp">Generated <abbr class="timeago" title="2015-11-19T13:45:34-08:00">2015-11-19T13:45:34-08:00</abbr></div>
++      <div class="timestamp">Generated <abbr class="timeago" title="2015-11-19T15:24:57-08:00">2015-11-19T15:24:57-08:00</abbr></div>
+       <ul class="group_tabs"></ul>
+ 
+       <div id="content">
+@@ -25,15 +25,15 @@
+      covered at
+      <span class="covered_strength">
+        <span class="green">
+-         2.32
++         2.24
+        </span>
+     </span> hits/line)
+   </h2>
+   <a name="AllFiles"></a>
+   <div>
+     <b>25</b> files in total.
+-    <b>126</b> relevant lines. 
+-    <span class="green"><b>126</b> lines covered</span> and
++    <b>125</b> relevant lines. 
++    <span class="green"><b>125</b> lines covered</span> and
+     <span class="red"><b>0</b> lines missed </span>
+   </div>
+   <table class="file_list">
+@@ -83,11 +83,11 @@
+       <tr>
+         <td class="strong"><a href="#7c281e3797582c2b2c741a6ce666f6fc0c85eda0" class="src_link" title="app/helpers/purchases_helper.rb">app/helpers/purchases_helper.rb</a></td>
+         <td class="green strong">100.0 %</td>
+-        <td>10</td>
+-        <td>7</td>
+-        <td>7</td>
++        <td>9</td>
++        <td>6</td>
++        <td>6</td>
+         <td>0</td>
+-        <td>2.9</td>
++        <td>2.3</td>
+       </tr>
+       
+       <tr>
+@@ -103,11 +103,11 @@
+       <tr>
+         <td class="strong"><a href="#eaacbe38a70ffd5abd5d417a5d96929b8bf77cce" class="src_link" title="app/models/purchase.rb">app/models/purchase.rb</a></td>
+         <td class="green strong">100.0 %</td>
+-        <td>22</td>
+-        <td>15</td>
+-        <td>15</td>
++        <td>21</td>
++        <td>14</td>
++        <td>14</td>
+         <td>0</td>
+-        <td>10.8</td>
++        <td>11.1</td>
+       </tr>
+       
+       <tr>
+@@ -243,9 +243,9 @@
+       <tr>
+         <td class="strong"><a href="#026c0be04630b776665c9fc0b0c1e85cce5f0bf3" class="src_link" title="spec/controllers/file_upload_controller_spec.rb">spec/controllers/file_upload_controller_spec.rb</a></td>
+         <td class="green strong">100.0 %</td>
+-        <td>13</td>
+-        <td>8</td>
+-        <td>8</td>
++        <td>15</td>
++        <td>9</td>
++        <td>9</td>
+         <td>0</td>
+         <td>1.0</td>
+       </tr>
+@@ -283,7 +283,7 @@
+       <tr>
+         <td class="strong"><a href="#5038b00c85033e02ff75ef09c1c21acc2716e19c" class="src_link" title="spec/models/purchase_spec.rb">spec/models/purchase_spec.rb</a></td>
+         <td class="green strong">100.0 %</td>
+-        <td>22</td>
++        <td>21</td>
+         <td>13</td>
+         <td>13</td>
+         <td>0</td>
+@@ -483,8 +483,8 @@
+     <h3>app/helpers/purchases_helper.rb</h3>
+     <h4><span class="green">100.0 %</span> covered</h4>
+     <div>
+-      <b>7</b> relevant lines. 
+-      <span class="green"><b>7</b> lines covered</span> and
++      <b>6</b> relevant lines. 
++      <span class="green"><b>6</b> lines covered</span> and
+       <span class="red"><b>0</b> lines missed.</span>
+     </div>
+   </div>
+@@ -519,34 +519,28 @@
+         <li class="covered" data-hits="6" data-linenumber="5">
+           <span class="hits">6</span>
+           
+-          <code class="ruby">      sub_total = purchase.purchase_total</code>
+-        </li>
+-      
+-        <li class="covered" data-hits="6" data-linenumber="6">
+-          <span class="hits">6</span>
+-          
+-          <code class="ruby">      total_revenue += sub_total</code>
++          <code class="ruby">      total_revenue += purchase.purchase_total</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="7">
++        <li class="never" data-hits="" data-linenumber="6">
+           
+           
+           <code class="ruby">    end</code>
+         </li>
+       
+-        <li class="covered" data-hits="2" data-linenumber="8">
++        <li class="covered" data-hits="2" data-linenumber="7">
+           <span class="hits">2</span>
+           
+           <code class="ruby">    total_revenue</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="9">
++        <li class="never" data-hits="" data-linenumber="8">
+           
+           
+           <code class="ruby">  end</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="10">
++        <li class="never" data-hits="" data-linenumber="9">
+           
+           
+           <code class="ruby">end</code>
+@@ -597,8 +591,8 @@
+     <h3>app/models/purchase.rb</h3>
+     <h4><span class="green">100.0 %</span> covered</h4>
+     <div>
+-      <b>15</b> relevant lines. 
+-      <span class="green"><b>15</b> lines covered</span> and
++      <b>14</b> relevant lines. 
++      <span class="green"><b>14</b> lines covered</span> and
+       <span class="red"><b>0</b> lines missed.</span>
+     </div>
+   </div>
+@@ -633,7 +627,7 @@
+         <li class="covered" data-hits="7" data-linenumber="5">
+           <span class="hits">7</span>
+           
+-          <code class="ruby">    count = self.purchase_count.to_i</code>
++          <code class="ruby">    count = self.purchase_count</code>
+         </li>
+       
+         <li class="covered" data-hits="7" data-linenumber="6">
+@@ -645,94 +639,88 @@
+         <li class="covered" data-hits="7" data-linenumber="7">
+           <span class="hits">7</span>
+           
+-          <code class="ruby">    total = count * price</code>
++          <code class="ruby">    count * price</code>
+         </li>
+       
+-        <li class="covered" data-hits="7" data-linenumber="8">
+-          <span class="hits">7</span>
+-          
+-          <code class="ruby">    total</code>
+-        </li>
+-      
+-        <li class="never" data-hits="" data-linenumber="9">
++        <li class="never" data-hits="" data-linenumber="8">
+           
+           
+           <code class="ruby">  end</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="10">
++        <li class="never" data-hits="" data-linenumber="9">
+           
+           
+           <code class="ruby"></code>
+         </li>
+       
+-        <li class="covered" data-hits="1" data-linenumber="11">
++        <li class="covered" data-hits="1" data-linenumber="10">
+           <span class="hits">1</span>
+           
+           <code class="ruby">  def self.import(file_path, file_upload)</code>
+         </li>
+       
+-        <li class="covered" data-hits="2" data-linenumber="12">
++        <li class="covered" data-hits="2" data-linenumber="11">
+           <span class="hits">2</span>
+           
+           <code class="ruby">    CSV.foreach(file_path, headers: true) do |row|</code>
+         </li>
+       
+-        <li class="covered" data-hits="8" data-linenumber="13">
++        <li class="covered" data-hits="8" data-linenumber="12">
+           <span class="hits">8</span>
+           
+           <code class="ruby">      rh = row.to_hash</code>
+         </li>
+       
+-        <li class="covered" data-hits="8" data-linenumber="14">
++        <li class="covered" data-hits="8" data-linenumber="13">
+           <span class="hits">8</span>
+           
+           <code class="ruby">      purchase_hash = {}</code>
+         </li>
+       
+-        <li class="covered" data-hits="8" data-linenumber="15">
++        <li class="covered" data-hits="8" data-linenumber="14">
+           <span class="hits">8</span>
+           
+           <code class="ruby">      rh.each do |key, value|</code>
+         </li>
+       
+-        <li class="covered" data-hits="48" data-linenumber="16">
++        <li class="covered" data-hits="48" data-linenumber="15">
+           <span class="hits">48</span>
+           
+           <code class="ruby">        key = key.sub(&quot; &quot;,&quot;_&quot;)</code>
+         </li>
+       
+-        <li class="covered" data-hits="48" data-linenumber="17">
++        <li class="covered" data-hits="48" data-linenumber="16">
+           <span class="hits">48</span>
+           
+           <code class="ruby">        purchase_hash.store(key, value)</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="18">
++        <li class="never" data-hits="" data-linenumber="17">
+           
+           
+           <code class="ruby">      end</code>
+         </li>
+       
+-        <li class="covered" data-hits="8" data-linenumber="19">
++        <li class="covered" data-hits="8" data-linenumber="18">
+           <span class="hits">8</span>
+           
+           <code class="ruby">      file_upload.purchases.create! purchase_hash</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="20">
++        <li class="never" data-hits="" data-linenumber="19">
+           
+           
+           <code class="ruby">    end</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="21">
++        <li class="never" data-hits="" data-linenumber="20">
+           
+           
+           <code class="ruby">  end</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="22">
++        <li class="never" data-hits="" data-linenumber="21">
+           
+           
+           <code class="ruby">end</code>
+@@ -1917,8 +1905,8 @@
+     <h3>spec/controllers/file_upload_controller_spec.rb</h3>
+     <h4><span class="green">100.0 %</span> covered</h4>
+     <div>
+-      <b>8</b> relevant lines. 
+-      <span class="green"><b>8</b> lines covered</span> and
++      <b>9</b> relevant lines. 
++      <span class="green"><b>9</b> lines covered</span> and
+       <span class="red"><b>0</b> lines missed.</span>
+     </div>
+   </div>
+@@ -1953,52 +1941,64 @@
+         <li class="covered" data-hits="1" data-linenumber="5">
+           <span class="hits">1</span>
+           
+-          <code class="ruby">  it &#39;uploads a csv file&#39; do</code>
++          <code class="ruby">  describe &#39;#import&#39; do</code>
+         </li>
+       
+         <li class="covered" data-hits="1" data-linenumber="6">
+           <span class="hits">1</span>
+           
+-          <code class="ruby">    file = fixture_file_upload(&quot;csv/test_example_data.csv&quot;, &quot;text/csv&quot;)</code>
++          <code class="ruby">    it &#39;uploads a csv file&#39; do</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="7">
+-          
++        <li class="covered" data-hits="1" data-linenumber="7">
++          <span class="hits">1</span>
+           
+-          <code class="ruby"></code>
++          <code class="ruby">      file = fixture_file_upload(&quot;csv/test_example_data.csv&quot;, &quot;text/csv&quot;)</code>
+         </li>
+       
+-        <li class="covered" data-hits="1" data-linenumber="8">
+-          <span class="hits">1</span>
++        <li class="never" data-hits="" data-linenumber="8">
+           
+-          <code class="ruby">    allow(Purchase).to receive(:import)</code>
++          
++          <code class="ruby"></code>
+         </li>
+       
+         <li class="covered" data-hits="1" data-linenumber="9">
+           <span class="hits">1</span>
+           
+-          <code class="ruby">    params = {:file =&gt; file}</code>
++          <code class="ruby">      allow(Purchase).to receive(:import)</code>
+         </li>
+       
+         <li class="covered" data-hits="1" data-linenumber="10">
+           <span class="hits">1</span>
+           
+-          <code class="ruby">    post :import, params</code>
++          <code class="ruby">      params = {:file =&gt; file}</code>
+         </li>
+       
+         <li class="covered" data-hits="1" data-linenumber="11">
+           <span class="hits">1</span>
+           
+-          <code class="ruby">    expect(response).to redirect_to(root_path)</code>
++          <code class="ruby">      post :import, params</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="12">
++        <li class="covered" data-hits="1" data-linenumber="12">
++          <span class="hits">1</span>
++          
++          <code class="ruby">      expect(response).to redirect_to(root_path)</code>
++        </li>
++      
++        <li class="never" data-hits="" data-linenumber="13">
++          
++          
++          <code class="ruby">    end</code>
++        </li>
++      
++        <li class="never" data-hits="" data-linenumber="14">
+           
+           
+           <code class="ruby">  end</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="13">
++        <li class="never" data-hits="" data-linenumber="15">
+           
+           
+           <code class="ruby">end</code>
+@@ -2055,7 +2055,7 @@
+         <li class="covered" data-hits="1" data-linenumber="6">
+           <span class="hits">1</span>
+           
+-          <code class="ruby">    attach_file(&#39;file&#39;, Rails.root + &quot;../example_data.csv&quot;)</code>
++          <code class="ruby">    attach_file(&#39;file&#39;, Rails.root + &quot;spec/fixtures/csv/test_example_data.csv&quot;)</code>
+         </li>
+       
+         <li class="covered" data-hits="1" data-linenumber="7">
+@@ -2127,25 +2127,25 @@
+         <li class="covered" data-hits="1" data-linenumber="5">
+           <span class="hits">1</span>
+           
+-          <code class="ruby">  it &quot;should get the total revenue of an upload&quot; do</code>
++          <code class="ruby">  it &quot;should calculate and return the total revenue of an upload&quot; do</code>
+         </li>
+       
+         <li class="covered" data-hits="1" data-linenumber="6">
+           <span class="hits">1</span>
+           
+-          <code class="ruby">    purchases = [Purchase.create(</code>
++          <code class="ruby">    purchases = [</code>
+         </li>
+       
+         <li class="never" data-hits="" data-linenumber="7">
+           
+           
+-          <code class="ruby">      {:purchase_count =&gt; &quot;3&quot;, :item_price =&gt; 25.0}),</code>
++          <code class="ruby">      Purchase.create({:purchase_count =&gt; 3, :item_price =&gt; 25.0}),</code>
+         </li>
+       
+         <li class="never" data-hits="" data-linenumber="8">
+           
+           
+-          <code class="ruby">      Purchase.create({:purchase_count =&gt; &quot;3&quot;, :item_price =&gt; 25.0})</code>
++          <code class="ruby">      Purchase.create({:purchase_count =&gt; 2, :item_price =&gt; 32.0})</code>
+         </li>
+       
+         <li class="never" data-hits="" data-linenumber="9">
+@@ -2157,7 +2157,7 @@
+         <li class="covered" data-hits="1" data-linenumber="10">
+           <span class="hits">1</span>
+           
+-          <code class="ruby">    expect(total_purchase_revenue(purchases)).to eq(150)</code>
++          <code class="ruby">    expect(total_purchase_revenue(purchases)).to eq(139)</code>
+         </li>
+       
+         <li class="never" data-hits="" data-linenumber="11">
+@@ -2280,97 +2280,91 @@
+           <code class="ruby">  describe &quot;#import&quot; do</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="7">
+-          
++        <li class="covered" data-hits="1" data-linenumber="7">
++          <span class="hits">1</span>
+           
+-          <code class="ruby"></code>
++          <code class="ruby">    it &#39;creates new Purchases from an imported CSV file&#39; do</code>
+         </li>
+       
+         <li class="covered" data-hits="1" data-linenumber="8">
+           <span class="hits">1</span>
+           
+-          <code class="ruby">    it &#39;creates new Purchases from an imported CSV file&#39; do</code>
++          <code class="ruby">      file_path = (Rails.root.join(&quot;spec/fixtures/csv/test_example_data.csv&quot;))</code>
+         </li>
+       
+         <li class="covered" data-hits="1" data-linenumber="9">
+           <span class="hits">1</span>
+           
+-          <code class="ruby">      file = (Rails.root.join(&quot;spec/fixtures/csv/test_example_data.csv&quot;))</code>
++          <code class="ruby">      file_upload = FileUpload.create!</code>
+         </li>
+       
+         <li class="covered" data-hits="1" data-linenumber="10">
+           <span class="hits">1</span>
+           
+-          <code class="ruby">      file_upload = FileUpload.create!</code>
++          <code class="ruby">      Purchase.import(file_path, file_upload)</code>
+         </li>
+       
+         <li class="covered" data-hits="1" data-linenumber="11">
+           <span class="hits">1</span>
+           
+-          <code class="ruby">      Purchase.import(file, file_upload)</code>
+-        </li>
+-      
+-        <li class="covered" data-hits="1" data-linenumber="12">
+-          <span class="hits">1</span>
+-          
+           <code class="ruby">      expect(file_upload.purchases.length).to eq(4)</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="13">
++        <li class="never" data-hits="" data-linenumber="12">
+           
+           
+           <code class="ruby">    end</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="14">
++        <li class="never" data-hits="" data-linenumber="13">
+           
+           
+           <code class="ruby">  end</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="15">
++        <li class="never" data-hits="" data-linenumber="14">
+           
+           
+           <code class="ruby"></code>
+         </li>
+       
+-        <li class="covered" data-hits="1" data-linenumber="16">
++        <li class="covered" data-hits="1" data-linenumber="15">
+           <span class="hits">1</span>
+           
+           <code class="ruby">  describe &quot;.purchase_total&quot; do</code>
+         </li>
+       
+-        <li class="covered" data-hits="1" data-linenumber="17">
++        <li class="covered" data-hits="1" data-linenumber="16">
+           <span class="hits">1</span>
+           
+           <code class="ruby">    it &#39;gets the total revenue from an individual purchase&#39; do</code>
+         </li>
+       
+-        <li class="covered" data-hits="1" data-linenumber="18">
++        <li class="covered" data-hits="1" data-linenumber="17">
+           <span class="hits">1</span>
+           
+-          <code class="ruby">      new_purchase = Purchase.new({:purchase_count =&gt; &quot;3&quot;, :item_price =&gt; 25.0})</code>
++          <code class="ruby">      new_purchase = Purchase.new({:purchase_count =&gt; 3, :item_price =&gt; 25.0})</code>
+         </li>
+       
+-        <li class="covered" data-hits="1" data-linenumber="19">
++        <li class="covered" data-hits="1" data-linenumber="18">
+           <span class="hits">1</span>
+           
+           <code class="ruby">      expect(new_purchase.purchase_total).to eq(75)</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="20">
++        <li class="never" data-hits="" data-linenumber="19">
+           
+           
+           <code class="ruby">    end</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="21">
++        <li class="never" data-hits="" data-linenumber="20">
+           
+           
+           <code class="ruby">  end</code>
+         </li>
+       
+-        <li class="never" data-hits="" data-linenumber="22">
++        <li class="never" data-hits="" data-linenumber="21">
+           
+           
+           <code class="ruby">end</code>
+diff --git a/code_challenge/spec/controllers/file_upload_controller_spec.rb b/code_challenge/spec/controllers/file_upload_controller_spec.rb
+index 0984af7..cc9186e 100644
+--- a/code_challenge/spec/controllers/file_upload_controller_spec.rb
++++ b/code_challenge/spec/controllers/file_upload_controller_spec.rb
+@@ -2,12 +2,14 @@ require 'rails_helper'
+ 
+ describe FileUploadsController do
+ 
+-  it 'uploads a csv file' do
+-    file = fixture_file_upload("csv/test_example_data.csv", "text/csv")
++  describe '#import' do
++    it 'uploads a csv file' do
++      file = fixture_file_upload("csv/test_example_data.csv", "text/csv")
+ 
+-    allow(Purchase).to receive(:import)
+-    params = {:file => file}
+-    post :import, params
+-    expect(response).to redirect_to(root_path)
++      allow(Purchase).to receive(:import)
++      params = {:file => file}
++      post :import, params
++      expect(response).to redirect_to(root_path)
++    end
+   end
+ end
+\ No newline at end of file
+diff --git a/code_challenge/spec/features/upload_path_spec.rb b/code_challenge/spec/features/upload_path_spec.rb
+index aee72d7..8ba36cc 100644
+--- a/code_challenge/spec/features/upload_path_spec.rb
++++ b/code_challenge/spec/features/upload_path_spec.rb
+@@ -3,7 +3,7 @@ require 'rails_helper'
+ describe 'the process for uploading a file' do
+   it 'uploads a file' do
+     visit '/'
+-    attach_file('file', Rails.root + "../example_data.csv")
++    attach_file('file', Rails.root + "spec/fixtures/csv/test_example_data.csv")
+     click_on "Import CSV"
+     expect(page).to have_content 'Marty McFly'
+   end
+diff --git a/code_challenge/spec/helpers/purchase_helper_spec.rb b/code_challenge/spec/helpers/purchase_helper_spec.rb
+index 265457d..3dd0ff6 100644
+--- a/code_challenge/spec/helpers/purchase_helper_spec.rb
++++ b/code_challenge/spec/helpers/purchase_helper_spec.rb
+@@ -2,12 +2,12 @@ require 'rails_helper'
+ 
+ 
+ describe PurchasesHelper do
+-  it "should get the total revenue of an upload" do
+-    purchases = [Purchase.create(
+-      {:purchase_count => "3", :item_price => 25.0}),
+-      Purchase.create({:purchase_count => "3", :item_price => 25.0})
++  it "should calculate and return the total revenue of an upload" do
++    purchases = [
++      Purchase.create({:purchase_count => 3, :item_price => 25.0}),
++      Purchase.create({:purchase_count => 2, :item_price => 32.0})
+     ]
+-    expect(total_purchase_revenue(purchases)).to eq(150)
++    expect(total_purchase_revenue(purchases)).to eq(139)
+   end
+ 
+ end
+diff --git a/code_challenge/spec/models/purchase_spec.rb b/code_challenge/spec/models/purchase_spec.rb
+index 9195407..708a046 100644
+--- a/code_challenge/spec/models/purchase_spec.rb
++++ b/code_challenge/spec/models/purchase_spec.rb
+@@ -4,18 +4,17 @@ describe Purchase do
+   it { should belong_to :file_upload }
+ 
+   describe "#import" do
+-
+     it 'creates new Purchases from an imported CSV file' do
+-      file = (Rails.root.join("spec/fixtures/csv/test_example_data.csv"))
++      file_path = (Rails.root.join("spec/fixtures/csv/test_example_data.csv"))
+       file_upload = FileUpload.create!
+-      Purchase.import(file, file_upload)
++      Purchase.import(file_path, file_upload)
+       expect(file_upload.purchases.length).to eq(4)
+     end
+   end
+ 
+   describe ".purchase_total" do
+     it 'gets the total revenue from an individual purchase' do
+-      new_purchase = Purchase.new({:purchase_count => "3", :item_price => 25.0})
++      new_purchase = Purchase.new({:purchase_count => 3, :item_price => 25.0})
+       expect(new_purchase.purchase_total).to eq(75)
+     end
+   end
+-- 
+2.3.2 (Apple Git-55)
+

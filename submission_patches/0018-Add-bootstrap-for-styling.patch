@@ -1,0 +1,196 @@
+From 70ca5a7755d36cee08298cf60d422e8ea7f316bb Mon Sep 17 00:00:00 2001
+From: AlexAlt <alexandra.m.altieri@gmail.com>
+Date: Thu, 19 Nov 2015 14:09:57 -0800
+Subject: [PATCH 18/22] Add bootstrap for styling.
+
+---
+ code_challenge/Gemfile                             |  1 +
+ code_challenge/Gemfile.lock                        |  7 +++
+ .../app/assets/javascripts/application.js          |  1 +
+ .../app/assets/stylesheets/application.css         | 15 -----
+ .../app/assets/stylesheets/application.scss        | 17 ++++++
+ .../app/views/file_uploads/index.html.erb          | 70 ++++++++++++----------
+ 6 files changed, 64 insertions(+), 47 deletions(-)
+ delete mode 100644 code_challenge/app/assets/stylesheets/application.css
+ create mode 100644 code_challenge/app/assets/stylesheets/application.scss
+
+diff --git a/code_challenge/Gemfile b/code_challenge/Gemfile
+index b3fc4a8..886f051 100644
+--- a/code_challenge/Gemfile
++++ b/code_challenge/Gemfile
+@@ -9,6 +9,7 @@ gem 'jquery-rails'
+ gem 'turbolinks'
+ gem 'jbuilder', '~> 2.0'
+ gem 'sdoc', '~> 0.4.0', group: :doc
++gem 'bootstrap-sass', '~> 3.3.5'
+ 
+ 
+ group :development, :test do
+diff --git a/code_challenge/Gemfile.lock b/code_challenge/Gemfile.lock
+index 2967b2e..54987d5 100644
+--- a/code_challenge/Gemfile.lock
++++ b/code_challenge/Gemfile.lock
+@@ -38,8 +38,14 @@ GEM
+       tzinfo (~> 1.1)
+     addressable (2.3.8)
+     arel (6.0.3)
++    autoprefixer-rails (6.1.0.1)
++      execjs
++      json
+     binding_of_caller (0.7.2)
+       debug_inspector (>= 0.0.1)
++    bootstrap-sass (3.3.5.1)
++      autoprefixer-rails (>= 5.0.0.1)
++      sass (>= 3.3.0)
+     builder (3.2.2)
+     byebug (8.2.0)
+     capybara (2.5.0)
+@@ -195,6 +201,7 @@ PLATFORMS
+   ruby
+ 
+ DEPENDENCIES
++  bootstrap-sass (~> 3.3.5)
+   byebug
+   capybara-rails
+   coffee-rails (~> 4.1.0)
+diff --git a/code_challenge/app/assets/javascripts/application.js b/code_challenge/app/assets/javascripts/application.js
+index e07c5a8..f91cae5 100644
+--- a/code_challenge/app/assets/javascripts/application.js
++++ b/code_challenge/app/assets/javascripts/application.js
+@@ -11,6 +11,7 @@
+ // about supported directives.
+ //
+ //= require jquery
++//= require bootstrap-sprockets
+ //= require jquery_ujs
+ //= require turbolinks
+ //= require_tree .
+diff --git a/code_challenge/app/assets/stylesheets/application.css b/code_challenge/app/assets/stylesheets/application.css
+deleted file mode 100644
+index f9cd5b3..0000000
+--- a/code_challenge/app/assets/stylesheets/application.css
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/*
+- * This is a manifest file that'll be compiled into application.css, which will include all the files
+- * listed below.
+- *
+- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+- *
+- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+- * compiled file so the styles you add here take precedence over styles defined in any styles
+- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+- * file per style scope.
+- *
+- *= require_tree .
+- *= require_self
+- */
+diff --git a/code_challenge/app/assets/stylesheets/application.scss b/code_challenge/app/assets/stylesheets/application.scss
+new file mode 100644
+index 0000000..64ed4d8
+--- /dev/null
++++ b/code_challenge/app/assets/stylesheets/application.scss
+@@ -0,0 +1,17 @@
++/*
++ * This is a manifest file that'll be compiled into application.css, which will include all the files
++ * listed below.
++ *
++ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
++ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
++ *
++ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
++ * compiled file so the styles you add here take precedence over styles defined in any styles
++ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
++ * file per style scope.
++ *
++ *= require_tree .
++ *= require_self
++ */
++@import "bootstrap-sprockets";
++@import "bootstrap";
+\ No newline at end of file
+diff --git a/code_challenge/app/views/file_uploads/index.html.erb b/code_challenge/app/views/file_uploads/index.html.erb
+index 05921a4..e70e770 100644
+--- a/code_challenge/app/views/file_uploads/index.html.erb
++++ b/code_challenge/app/views/file_uploads/index.html.erb
+@@ -1,36 +1,42 @@
+-<%= form_tag import_path, multipart: true do %>
+-  <%= file_field_tag :file %>
+-  <%= submit_tag "Import CSV" %>
+-<% end %>
+-<hr>
++<div class="container">
+ 
+-<% if @file_uploads.any? %>
+-  <% @file_uploads.each do |file_upload| %>
+-    <table>
+-      <tr>
+-        <th>Purchaser Name</th>
+-        <th>Item Description</th>
+-        <th>Item Price</th>
+-        <th>Purchase Count</th>
+-        <th>Merchant Address</th>
+-        <th>Merchant Name</th>
+-      </tr>
+-        <% file_upload.purchases.each do |purchase| %>
+-          <tr>
+-            <td><%=purchase.purchaser_name%></td>
+-            <td><%=purchase.item_description%></td> 
+-            <td><%=number_to_currency(purchase.item_price)%></td>
+-            <td><%=purchase.purchase_count%></td>
+-            <td><%=purchase.merchant_address%></td> 
+-            <td><%=purchase.merchant_name%></td>
+-          </tr>
+-        <% end %>
++  <h2>Dr. Deal-a-Day's "Deal a Day" <small>Daily purchase data</small> </h2>
++  <h4>Upload a file: </h4>
++  <%= form_tag import_path, multipart: true do %>
++    <%= file_field_tag :file %>
++    <br>
++    <%= submit_tag "Import CSV", class: 'btn-sm btn-default' %>
++  <% end %>
++  <hr>
++
++  <% if @file_uploads.any? %>
++    <% @file_uploads.each do |file_upload| %>
++      <table class="table table-striped">
+         <tr>
+-          <th>Total Revenue</th>
+-          <td><%= number_to_currency(total_purchase_revenue(file_upload.purchases)) %></td>
++          <th>Purchaser Name</th>
++          <th>Item Description</th>
++          <th>Item Price</th>
++          <th>Purchase Count</th>
++          <th>Merchant Address</th>
++          <th>Merchant Name</th>
+         </tr>
+-    </table>
++          <% file_upload.purchases.each do |purchase| %>
++            <tr>
++              <td><%=purchase.purchaser_name%></td>
++              <td><%=purchase.item_description%></td> 
++              <td><%=number_to_currency(purchase.item_price)%></td>
++              <td><%=purchase.purchase_count%></td>
++              <td><%=purchase.merchant_address%></td> 
++              <td><%=purchase.merchant_name%></td>
++            </tr>
++          <% end %>
++          <tr>
++            <th>Total Revenue</th>
++            <td><%= number_to_currency(total_purchase_revenue(file_upload.purchases)) %></td>
++          </tr>
++      </table>
++    <% end %>
++  <% else %>
++    No purchases to show.
+   <% end %>
+-<% else %>
+-  No purchases to show.
+-<% end %>
+\ No newline at end of file
++</div>
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+

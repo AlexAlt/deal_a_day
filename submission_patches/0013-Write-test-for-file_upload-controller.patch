@@ -1,7 +1,7 @@
 From 5ce94707eab5346ea5d1f6fd2ee807e894e773ed Mon Sep 17 00:00:00 2001
 From: AlexAlt <alexandra.m.altieri@gmail.com>
 Date: Thu, 19 Nov 2015 12:48:02 -0800
-Subject: [PATCH 13/16] Write test for file_upload controller.
+Subject: [PATCH 13/22] Write test for file_upload controller.
 
 ---
  code_challenge/app/controllers/file_uploads_controller.rb   |  2 +-

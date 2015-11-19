@@ -1,0 +1,89 @@
+From f9da74351e8ea5547053a884f05f4db9e3512dca Mon Sep 17 00:00:00 2001
+From: AlexAlt <alexandra.m.altieri@gmail.com>
+Date: Thu, 19 Nov 2015 15:39:48 -0800
+Subject: [PATCH 22/22] Add alert message if no file is attached.
+
+---
+ code_challenge/README.rdoc                                |  2 --
+ code_challenge/app/controllers/file_uploads_controller.rb | 11 ++++++++---
+ code_challenge/app/views/file_uploads/index.html.erb      |  4 ++--
+ code_challenge/app/views/layouts/application.html.erb     |  8 +++++++-
+ 4 files changed, 17 insertions(+), 8 deletions(-)
+
+diff --git a/code_challenge/README.rdoc b/code_challenge/README.rdoc
+index 57a1346..f88e71b 100644
+--- a/code_challenge/README.rdoc
++++ b/code_challenge/README.rdoc
+@@ -4,8 +4,6 @@ How to get this app up and running:
+ 
+ * Ruby version - 2.2.0
+ 
+-* Clone this repository
+-
+ * cd into the code_challenge directory
+ 
+ * Run `bundle` to install gems
+diff --git a/code_challenge/app/controllers/file_uploads_controller.rb b/code_challenge/app/controllers/file_uploads_controller.rb
+index 603694c..9269ec3 100644
+--- a/code_challenge/app/controllers/file_uploads_controller.rb
++++ b/code_challenge/app/controllers/file_uploads_controller.rb
+@@ -4,8 +4,13 @@ class FileUploadsController < ApplicationController
+   end
+ 
+   def import
+-    new_upload = FileUpload.create!
+-    Purchase.import(params[:file].path, new_upload)
+-    redirect_to root_path
++    if params[:file].present?
++      new_upload = FileUpload.create!
++      Purchase.import(params[:file].path, new_upload)
++      redirect_to root_path
++    else
++      flash[:alert] = "Please select a file to attach"
++      redirect_to root_path
++    end
+   end
+ end
+\ No newline at end of file
+diff --git a/code_challenge/app/views/file_uploads/index.html.erb b/code_challenge/app/views/file_uploads/index.html.erb
+index e70e770..b58f47d 100644
+--- a/code_challenge/app/views/file_uploads/index.html.erb
++++ b/code_challenge/app/views/file_uploads/index.html.erb
+@@ -5,7 +5,7 @@
+   <%= form_tag import_path, multipart: true do %>
+     <%= file_field_tag :file %>
+     <br>
+-    <%= submit_tag "Import CSV", class: 'btn-sm btn-default' %>
++    <%= submit_tag "Import CSV", class: 'btn-sm btn btn-primary' %>
+   <% end %>
+   <hr>
+ 
+@@ -39,4 +39,4 @@
+   <% else %>
+     No purchases to show.
+   <% end %>
+-</div>
+\ No newline at end of file
++</div>
+diff --git a/code_challenge/app/views/layouts/application.html.erb b/code_challenge/app/views/layouts/application.html.erb
+index 152ad48..460a5c1 100644
+--- a/code_challenge/app/views/layouts/application.html.erb
++++ b/code_challenge/app/views/layouts/application.html.erb
+@@ -8,7 +8,13 @@
+ </head>
+ <body>
+ 
+-<%= yield %>
++  <% if flash[:alert].present? %>
++    <div class="alert alert-danger">
++      <%= flash[:alert] %>
++    </div>
++  <% end %>
++  
++  <%= yield %>
+ 
+ </body>
+ </html>
+-- 
+2.3.2 (Apple Git-55)
+

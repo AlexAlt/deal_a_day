@@ -1,7 +1,7 @@
 From 7d929f2be0e6881d85edbe52548e0ea41dc9dc37 Mon Sep 17 00:00:00 2001
 From: AlexAlt <alexandra.m.altieri@gmail.com>
 Date: Thu, 19 Nov 2015 10:59:59 -0800
-Subject: [PATCH 10/16] Write code to pass integration spec.
+Subject: [PATCH 10/22] Write code to pass integration spec.
 
 ---
  .../app/controllers/file_uploads_controller.rb     |  7 +++++

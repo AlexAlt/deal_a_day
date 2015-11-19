@@ -1,0 +1,39 @@
+From 0572baec20aefb569e2bdf1c412b94575699c4c8 Mon Sep 17 00:00:00 2001
+From: AlexAlt <alexandra.m.altieri@gmail.com>
+Date: Thu, 19 Nov 2015 15:36:24 -0800
+Subject: [PATCH 19/22] Change schema so now purchase count is an integer
+
+---
+ code_challenge/db/migrate/20151119180721_create_purchases_table.rb | 2 +-
+ code_challenge/db/schema.rb                                        | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/code_challenge/db/migrate/20151119180721_create_purchases_table.rb b/code_challenge/db/migrate/20151119180721_create_purchases_table.rb
+index 1423692..defd9df 100644
+--- a/code_challenge/db/migrate/20151119180721_create_purchases_table.rb
++++ b/code_challenge/db/migrate/20151119180721_create_purchases_table.rb
+@@ -4,7 +4,7 @@ class CreatePurchasesTable < ActiveRecord::Migration
+       t.string :purchaser_name
+       t.string :item_description
+       t.decimal :item_price, :precision => 5, :scale => 2
+-      t.string :purchase_count
++      t.integer :purchase_count
+       t.string :merchant_address
+       t.string :merchant_name
+       t.integer :file_upload_id
+diff --git a/code_challenge/db/schema.rb b/code_challenge/db/schema.rb
+index 614e08f..8a1a711 100644
+--- a/code_challenge/db/schema.rb
++++ b/code_challenge/db/schema.rb
+@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20151119180721) do
+     t.string   "purchaser_name"
+     t.string   "item_description"
+     t.decimal  "item_price",       precision: 5, scale: 2
+-    t.string   "purchase_count"
++    t.integer  "purchase_count"
+     t.string   "merchant_address"
+     t.string   "merchant_name"
+     t.integer  "file_upload_id"
+-- 
+2.3.2 (Apple Git-55)
+

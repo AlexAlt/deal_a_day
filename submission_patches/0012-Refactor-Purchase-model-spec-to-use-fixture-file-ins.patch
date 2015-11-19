@@ -1,7 +1,7 @@
 From 10697c9542f25830ef138df19af77390224c7a3d Mon Sep 17 00:00:00 2001
 From: AlexAlt <alexandra.m.altieri@gmail.com>
 Date: Thu, 19 Nov 2015 12:46:48 -0800
-Subject: [PATCH 12/16] Refactor Purchase model spec to use fixture file
+Subject: [PATCH 12/22] Refactor Purchase model spec to use fixture file
  instead.
 
 ---

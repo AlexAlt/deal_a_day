@@ -1,0 +1,44 @@
+From 1c8bb546031e944899d656d29796cd6772f0de16 Mon Sep 17 00:00:00 2001
+From: AlexAlt <alexandra.m.altieri@gmail.com>
+Date: Thu, 19 Nov 2015 15:39:23 -0800
+Subject: [PATCH 21/22] Refactor purchase methods and purchase helper method
+
+---
+ code_challenge/app/helpers/purchases_helper.rb | 3 +--
+ code_challenge/app/models/purchase.rb          | 5 ++---
+ 2 files changed, 3 insertions(+), 5 deletions(-)
+
+diff --git a/code_challenge/app/helpers/purchases_helper.rb b/code_challenge/app/helpers/purchases_helper.rb
+index 49ce198..b9816e6 100644
+--- a/code_challenge/app/helpers/purchases_helper.rb
++++ b/code_challenge/app/helpers/purchases_helper.rb
+@@ -2,8 +2,7 @@ module PurchasesHelper
+   def total_purchase_revenue(purchases)
+     total_revenue = 0.0
+     purchases.each do |purchase|
+-      sub_total = purchase.purchase_total
+-      total_revenue += sub_total
++      total_revenue += purchase.purchase_total
+     end
+     total_revenue
+   end
+diff --git a/code_challenge/app/models/purchase.rb b/code_challenge/app/models/purchase.rb
+index c3242af..c1b3f5a 100644
+--- a/code_challenge/app/models/purchase.rb
++++ b/code_challenge/app/models/purchase.rb
+@@ -2,10 +2,9 @@ class Purchase < ActiveRecord::Base
+   belongs_to :file_upload
+ 
+   def purchase_total
+-    count = self.purchase_count.to_i
++    count = self.purchase_count
+     price = self.item_price
+-    total = count * price
+-    total
++    count * price
+   end
+ 
+   def self.import(file_path, file_upload)
+-- 
+2.3.2 (Apple Git-55)
+
