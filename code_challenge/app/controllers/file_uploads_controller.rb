@@ -5,7 +5,7 @@ class FileUploadsController < ApplicationController
 
   def import
     new_upload = FileUpload.create!
-    Purchase.import(params[:file], new_upload)
+    Purchase.import(params[:file].path, new_upload)
     redirect_to root_path
   end
 end
