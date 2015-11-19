@@ -12,4 +12,11 @@ describe Purchase do
       expect(file_upload.purchases.length).to eq(4)
     end
   end
+
+  describe ".purchase_total" do
+    it 'gets the total revenue from an individual purchase' do
+      new_purchase = Purchase.new({:purchase_count => "3", :item_price => 25.0})
+      expect(new_purchase.purchase_total).to eq(75)
+    end
+  end
 end

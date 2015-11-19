@@ -1,8 +1,14 @@
 class Purchase < ActiveRecord::Base
   belongs_to :file_upload
 
-  def self.import(file_path, file_upload)
+  def purchase_total
+    count = self.purchase_count.to_i
+    price = self.item_price
+    total = count * price
+    total
+  end
 
+  def self.import(file_path, file_upload)
     CSV.foreach(file_path, headers: true) do |row|
       rh = row.to_hash
       purchase_hash = {}
