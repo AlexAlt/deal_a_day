@@ -1,0 +1,36 @@
+<%= form_tag import_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import CSV" %>
+<% end %>
+<hr>
+
+<% if @file_uploads.any? %>
+  <% @file_uploads.each do |file_upload| %>
+    <table>
+      <tr>
+        <th>Purchaser Name</th>
+        <th>Item Description</th>
+        <th>Item Price</th>
+        <th>Purchase Count</th>
+        <th>Merchant Address</th>
+        <th>Merchant Name</th>
+      </tr>
+        <% file_upload.purchases.each do |purchase| %>
+          <tr>
+            <td><%=purchase.purchaser_name%></td>
+            <td><%=purchase.item_description%></td> 
+            <td><%=number_to_currency(purchase.item_price)%></td>
+            <td><%=purchase.purchase_count%></td>
+            <td><%=purchase.merchant_address%></td> 
+            <td><%=purchase.merchant_name%></td>
+          </tr>
+        <% end %>
+        <tr>
+          <th>Total Revenue</th>
+          <td><%= number_to_currency(total_purchase_revenue(file_upload.purchases)) %></td>
+        </tr>
+    </table>
+  <% end %>
+<% else %>
+  No purchases to show.
+<% end %>
