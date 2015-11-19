@@ -1,28 +1,18 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+How to get this app up and running:
 
-Things you may want to cover:
+* Ruby version - 2.2.0
 
-* Ruby version
+* Clone this repository
 
-* System dependencies
+* Run `bundle` inside the directory to install gems
 
-* Configuration
+* Get Postgres running. Version 9.4.4
 
-* Database creation
+* Run `rake db:create` and `rake db:migrate`
 
-* Database initialization
+* Start your rails server `rails s`
 
-* How to run the test suite
+* Open application at localhost:3000 in web browser to start uploading some CSV!!
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
